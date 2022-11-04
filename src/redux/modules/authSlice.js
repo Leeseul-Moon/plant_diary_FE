@@ -8,13 +8,11 @@ export const signUp = createAsyncThunk("SIGNUP", async (JoinInfo) => {
 
 export const logIn = createAsyncThunk("LOGIN", async (loginInfo) => {
   const res = await guestInstance.post(`/api/auth/login`, loginInfo);
-  console.log("res logIn headers> ", res.headers);
 
   const accessToken = res.headers.authorization;
   const refreshToken = res.headers["refresh-token"];
 
   if (accessToken && refreshToken) {
-    // localStorage.setItem("Authorization", `Bearer ${accessToken}`);
     localStorage.setItem("Authorization", `${accessToken}`);
     localStorage.setItem("refreshToken", `${refreshToken}`);
   }
@@ -32,14 +30,11 @@ export const mypage = createAsyncThunk("MYPAGE", async () => {
   return res.data.success === true ? res.data.data : false;
 });
 
-export const changeUserInfo = createAsyncThunk(
-  "CHANGE_USERINFO",
-  async (userInfo) => {
-    const res = await instance.put(`/api/auth/mypage`, userInfo);
-    console.log("mypage > ", res.data);
-    return res.data;
-  }
-);
+export const changeUserInfo = createAsyncThunk("CHANGE_USERINFO", async (userInfo) => {
+  const res = await instance.put(`/api/auth/mypage`, userInfo);
+  console.log("mypage > ", res.data);
+  return res.data;
+});
 
 export const emailConfirm = createAsyncThunk("CONFIRM_EMAIL", async (email) => {
   console.log("email :>> ", email);
@@ -48,14 +43,11 @@ export const emailConfirm = createAsyncThunk("CONFIRM_EMAIL", async (email) => {
   return res.data;
 });
 
-export const nicknameConfirm = createAsyncThunk(
-  "CONFIRM_NiCKNAME",
-  async (nickname) => {
-    const res = await guestInstance.post(`/api/auth/nickname`, { nickname });
-    console.log("res email > ", res.data);
-    return res.data;
-  }
-);
+export const nicknameConfirm = createAsyncThunk("CONFIRM_NiCKNAME", async (nickname) => {
+  const res = await guestInstance.post(`/api/auth/nickname`, { nickname });
+  console.log("res email > ", res.data);
+  return res.data;
+});
 
 // TODO: user default 값 수정해야 함. 일단 로그인 된 상태로 테스트하기 위해 값 넣어둠
 const authSlice = createSlice({

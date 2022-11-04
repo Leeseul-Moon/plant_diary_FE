@@ -16,13 +16,10 @@ export const addPost = createAsyncThunk("ADD_POST", async (post) => {
   return res.data;
 });
 
-export const uploadThumbnail = createAsyncThunk(
-  "UPLOAD_THUMBNAIL",
-  async (thumbnail) => {
-    const res = await imageClient.post(`/api/posts/upload`, thumbnail);
-    return res.data;
-  }
-);
+export const uploadThumbnail = createAsyncThunk("UPLOAD_THUMBNAIL", async (thumbnail) => {
+  const res = await imageClient.post(`/api/posts/upload`, thumbnail);
+  return res.data;
+});
 
 export const updatePost = createAsyncThunk("UPDATE_POST", async (post) => {
   const { id, title, content, thumbnail } = post;
@@ -31,7 +28,6 @@ export const updatePost = createAsyncThunk("UPDATE_POST", async (post) => {
     content,
     thumbnail,
   });
-  console.log("res update > ", res.data);
   return res.data;
 });
 
